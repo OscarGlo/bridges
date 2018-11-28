@@ -45,5 +45,21 @@ class Villes {
 
     //rajout d'éventuelles méthodes
 
+    //tester si deux villes sont reliables
+    function isLinkable($x1, $y1, $x2, $y2) {
+
+        if($this->villes[$x1][$y1]->getVillesLiees){
+            
+        }
+
+        if(!is_null($this->villes[$x1][$y1]) && !is_null($this->villes[$x2][$y2])){
+            if ($this->villes[$x1, $y1]->nombrePonts < $this->villes[$x1, $y1]->nombrePontsMax && $this->villes[$x2, $y2]->nombrePonts < $this->villes[$x2, $y2]->nombrePontsMax){
+                if(($x1 == $x2 || $y1 == $y2) && !($x1 == $x2 && $y1 == $y2)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }

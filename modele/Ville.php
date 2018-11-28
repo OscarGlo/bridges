@@ -42,4 +42,13 @@ class Ville {
 
     //il faut ici implémenter les méthodes qui permettent de lier des villes entre elles, ...
 
+
+    function getVillesLiees() {
+        return $this->villesLiees
+    }
+
+    function linkWith($x, $y) {
+        $this->villesLiees[] = array($x, $y);
+    }
+
 }
