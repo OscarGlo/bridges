@@ -1,6 +1,7 @@
 <?php
 
-require_once "vue/vue.php";
+require_once "config/config.php";
+require_once "controleur/routeur.php";
 
-$vue = new Vue();
-$vue->auth();
+$routeur = new Routeur();
+$routeur->routerRequete();
