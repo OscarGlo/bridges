@@ -5,6 +5,12 @@
     <title>Bridges</title>
 </head>
 <body>
+    <form action="" method="post">
+        <input type="submit" name="logout" value="Déconnexion">
+    </form>
 
+    <form action="" method="post">
+        
+    </form>
 </body>
 </html>
