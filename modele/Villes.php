@@ -49,76 +49,58 @@ class Villes {
         return ($x1 == $x2 || $y1 == $y2) && !($x1 == $x2 && $y1 == $y2);
     }
 
-    function nbPontPossible($x1, $y1, $x2, $y2){
-        return ($this->villes[$x1, $y1]->nombrePonts < $this->villes[$x1, $y1]->nombrePontsMax && $this->villes[$x2, $y2]->nombrePonts < $this->villes[$x2, $y2]->nombrePontsMax);
+    function nbPontPossible($x1, $y1, $x2, $y2) {
+        return ($this->villes[$x1][$y1]->nombrePonts < $this->villes[$x1][$y1]->nombrePontsMax && $this->villes[$x2][$y2]->nombrePonts < $this->villes[$x2][$y2]->nombrePontsMax);
     }
 
-    function wrongChoice($x1, $y1, $x2, $y2){
+    function wrongChoice($x1, $y1, $x2, $y2) {
         return !$this->nbPontPossible($x1, $y1, $x2, $y2);
     }
 
-    function villesEntre($x1, $y1, $x2, $y2){
-        if($x1 == $x2){
-            if($x1 < $x2){
-                $i = $x1+1;
-                $y = $x2-1;
-            }else{
-                $i = $x2+1;
-                $y = $x1-1;
-            }
-
-            for ($i < $y; i++){
+    function villesEntre($x1, $y1, $x2, $y2) {
+        if ($x1 == $x2) {
+            if ($x1 < $x2) {
+                $i = $x1 + 1;
+                $y = $x2 - 1;
+            } else {
+                $i = $x2 + 1;
+                $y = $x1 - 1;
             }
         }
     }
 
-    function nbLink($x1, $y1, $x2, $y2){
-        $tmpNbVilles = $this->villes[$x1][$y1]->getVillesLiees;
+    function nbLink($x1, $y1, $x2, $y2) {
+        $tmpNbVilles = $this->villes[$x1][$y1]->getVillesLiees();
         $nb = 0;
 
-        for $ville in $tmpNbVilles{
-            if($ville[0] == $x1 && $ville[1] == $x2){
-                nb++;
+        foreach ($tmpNbVilles as $ville) {
+            if ($ville[0] == $x2 && $ville[1] == $y2) {
+                $nb++;
             }
         }
 
-        if ($nb >1){
-            return false;
-        }
-
-        $tmpNbVilles = $this->villes[$x2][$y2]->getVillesLiees;
-        $nb = 0;
-
-        if ($nb >1){
-            return false;
-        }
-
-        return true;
-
+        return $nb < 2;
     }
-
 
 
     //tester si deux villes sont reliables
     function isLinkable($x1, $y1, $x2, $y2) {
-
-        if(!is_null($this->villes[$x1][$y1]) && !is_null($this->villes[$x2][$y2])){
-            if($this->nbLink($x1, $y1, $x2, $y2)){
-                if ($this->onSameAxis($x1, $y1, $x2, $y2)){
+        if ($this->existe($x1, $y1) && $this->existe($x2, $y2)) {
+            if ($this->nbLink($x1, $y1, $x2, $y2)) {
+                if ($this->onSameAxis($x1, $y1, $x2, $y2)) {
                     return true;
                 }
             }
-
         }
         return false;
     }
 
     function link($x1, $y1, $x2, $y2) {
-        if($this->isLinkable($x1, $y1, $x2, $y2)){
-            $this->villes[$x1, $y1]->linkWith($x2, $y2);
-            $this->villes[$x1, $y1]->nombrePonts++;
-            $this->villes[$x2, $y2]->linkWith($x1, $y1);
-            $this->villes[$x2, $y2]->nombrePonts++;
+        if ($this->isLinkable($x1, $y1, $x2, $y2)) {
+            $this->villes[$x1][$y1]->linkWith($x2, $y2);
+            $this->villes[$x1][$y1]->nombrePonts++;
+            $this->villes[$x2][$y2]->linkWith($x1, $y1);
+            $this->villes[$x2][$y2]->nombrePonts++;
         }
     }
 

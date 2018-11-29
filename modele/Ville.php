@@ -15,7 +15,7 @@ class Ville {
         $this->id = $id;
         $this->nombrePontsMax = $nombrePontsMax;
         $this->nombrePonts = $nombrePonts;
-        $this->villesLiees = null;
+        $this->villesLiees = array();
 
     }
 
@@ -44,7 +44,7 @@ class Ville {
 
 
     function getVillesLiees() {
-        return $this->villesLiees
+        return $this->villesLiees;
     }
 
     function linkWith($x, $y) {
