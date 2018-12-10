@@ -59,14 +59,34 @@ class Villes {
 
     function villesEntre($x1, $y1, $x2, $y2) {
         if ($x1 == $x2) {
-            if ($x1 < $x2) {
-                $i = $x1 + 1;
-                $y = $x2 - 1;
-            } else {
-                $i = $x2 + 1;
-                $y = $x1 - 1;
+            while ($y1 < $y2) {
+                $y1++;
+                if(get_class ($this->villes[$x1][$y1]) == "Ville"){
+                    return false;
+                }
+            }
+            while ($y1 > $y2) {
+                $y2++;
+                if(get_class ($this->villes[$x2][$y2]) == "Ville"){
+                    return false;
+                }
+            }
+        }else if ($y1 == $y2) {
+            while ($x1 < $x2) {
+                $x1++;
+                if(get_class ($this->villes[$x1][$y1]) == "Ville"){
+                    return false;
+                }
+            }
+            while ($x1 > $x2) {
+                $x2++;
+                if(get_class ($this->villes[$x2][$y2]) == "Ville"){
+                    return false;
+                }
             }
         }
+        return true;
+
     }
 
     function nbLink($x1, $y1, $x2, $y2) {
