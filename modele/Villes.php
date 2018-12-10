@@ -45,18 +45,22 @@ class Villes {
 
     //rajout d'éventuelles méthodes
 
+
     function onSameAxis($x1, $y1, $x2, $y2) {
         return ($x1 == $x2 || $y1 == $y2) && !($x1 == $x2 && $y1 == $y2);
     }
 
+    //renvoie true si le nombre de ponts des deux Ville sont compatibles
     function nbPontPossible($x1, $y1, $x2, $y2) {
         return ($this->villes[$x1][$y1]->nombrePonts < $this->villes[$x1][$y1]->nombrePontsMax && $this->villes[$x2][$y2]->nombrePonts < $this->villes[$x2][$y2]->nombrePontsMax);
     }
 
+    //test si le choix provoque un arret du jeu
     function wrongChoice($x1, $y1, $x2, $y2) {
-        return !$this->nbPontPossible($x1, $y1, $x2, $y2);
+        return !$this->nbPontPossible($x1, $y1, $x2, $y2) or $this->pontEntre($x1, $y1, $x2, $y2);
     }
 
+    //test si il y a des Ville entre deux Ville
     function villesEntre($x1, $y1, $x2, $y2) {
         if ($x1 == $x2) {
             while ($y1 < $y2) {
@@ -85,8 +89,40 @@ class Villes {
                 }
             }
         }
-        return true;
+        return false;
 
+    }
+
+    //vérifie si il y a des ponts entre les Ville
+    function pontEntre($x1, $y1, $x2, $y2){
+        if ($x1 == $x2) {
+            while ($y1 < $y2) {
+                $y1++;
+                if(get_class ($this->villes[$x2][$y2]) == "Bridge"){
+                    return true;
+                }
+            }
+            while ($y1 > $y2) {
+                $y2++;
+                if(get_class ($this->villes[$x2][$y2]) == "Bridge"){
+                    return true;
+                }
+            }
+        }else if ($y1 == $y2) {
+            while ($x1 < $x2) {
+                $x1++;
+                if(get_class ($this->villes[$x2][$y2]) == "Bridge"){
+                    return true;
+                }
+            }
+            while ($x1 > $x2) {
+                $x2++;
+                if(get_class ($this->villes[$x2][$y2]) == "Bridge"){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     function nbLink($x1, $y1, $x2, $y2) {
@@ -108,7 +144,9 @@ class Villes {
         if ($this->existe($x1, $y1) && $this->existe($x2, $y2)) {
             if ($this->nbLink($x1, $y1, $x2, $y2)) {
                 if ($this->onSameAxis($x1, $y1, $x2, $y2)) {
-                    return true;
+                    if (!$this->villesEntre($x1, $y1, $x2, $y2)){
+                        return true;
+                    }
                 }
             }
         }
