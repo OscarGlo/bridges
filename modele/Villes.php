@@ -65,26 +65,26 @@ class Villes {
         if ($x1 == $x2) {
             while ($y1 < $y2) {
                 $y1++;
-                if(get_class ($this->villes[$x1][$y1]) == "Ville"){
+                if($this->existe($x1, $y1) && get_class ($this->villes[$x1][$y1]) == "Ville"){
                     return true;
                 }
             }
             while ($y1 > $y2) {
                 $y2++;
-                if(get_class ($this->villes[$x2][$y2]) == "Ville"){
+                if($this->existe($x2, $y2) && get_class ($this->villes[$x2][$y2]) == "Ville"){
                     return true;
                 }
             }
         }else if ($y1 == $y2) {
             while ($x1 < $x2) {
                 $x1++;
-                if(get_class ($this->villes[$x1][$y1]) == "Ville"){
+                if($this->existe($x1, $y1) && get_class ($this->villes[$x1][$y1]) == "Ville"){
                     return true;
                 }
             }
             while ($x1 > $x2) {
                 $x2++;
-                if(get_class ($this->villes[$x2][$y2]) == "Ville"){
+                if($this->existe($x2, $y2) && get_class ($this->villes[$x2][$y2]) == "Ville"){
                     return true;
                 }
             }
