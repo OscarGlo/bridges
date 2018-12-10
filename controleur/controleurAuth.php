@@ -14,7 +14,7 @@ class ControleurAuth {
     public function auth() {
         if ($this->connexion->authentification($_POST["login"], $_POST["mdp"])) {
             $_SESSION["login"] = $_POST["login"];
-            $_SESSION["villes"] = new Villes();
+            $_SESSION["villes"] = serialize(new Villes());
             $this->vue->jeu();
         } else
             $this->vue->auth();
