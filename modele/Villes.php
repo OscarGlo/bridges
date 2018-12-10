@@ -144,7 +144,7 @@ class Villes {
         if ($this->existe($x1, $y1) && $this->existe($x2, $y2)) {
             if ($this->nbLink($x1, $y1, $x2, $y2)) {
                 if ($this->onSameAxis($x1, $y1, $x2, $y2)) {
-                    if (!$this->villesEntre($x1, $y1, $x2, $y2)){
+                    if ($this->villesEntre($x1, $y1, $x2, $y2)){
                         return true;
                     }
                 }
