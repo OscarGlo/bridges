@@ -69,7 +69,7 @@ class Villes {
                     return true;
                 }
             }
-            while ($y1 > $y2) {
+            while ($y1 > $y2 && $y1 != $y2) {
                 $y2++;
                 if($this->existe($x2, $y2) && get_class ($this->villes[$x2][$y2]) == "Ville"){
                     return true;
@@ -82,7 +82,7 @@ class Villes {
                     return true;
                 }
             }
-            while ($x1 > $x2) {
+            while ($x1 > $x2  && $x1 != $x2) {
                 $x2++;
                 if($this->existe($x2, $y2) && get_class ($this->villes[$x2][$y2]) == "Ville"){
                     return true;
@@ -144,7 +144,7 @@ class Villes {
         if ($this->existe($x1, $y1) && $this->existe($x2, $y2)) {
             if ($this->nbLink($x1, $y1, $x2, $y2)) {
                 if ($this->onSameAxis($x1, $y1, $x2, $y2)) {
-                    if ($this->villesEntre($x1, $y1, $x2, $y2)){
+                    if (!$this->villesEntre($x1, $y1, $x2, $y2)){
                         return true;
                     }
                 }
