@@ -63,26 +63,26 @@ class Villes {
     //test si il y a des Ville entre deux Ville
     function villesEntre($x1, $y1, $x2, $y2) {
         if ($x1 == $x2) {
-            while ($y1 < $y2) {
+            while ($y1 < $y2-1) {
                 $y1++;
                 if($this->existe($x1, $y1) && get_class ($this->villes[$x1][$y1]) == "Ville"){
                     return true;
                 }
             }
-            while ($y1 > $y2 && $y1 != $y2) {
+            while ($y1-1 > $y2) {
                 $y2++;
                 if($this->existe($x2, $y2) && get_class ($this->villes[$x2][$y2]) == "Ville"){
                     return true;
                 }
             }
         }else if ($y1 == $y2) {
-            while ($x1 < $x2) {
+            while ($x1 < $x2-1) {
                 $x1++;
                 if($this->existe($x1, $y1) && get_class ($this->villes[$x1][$y1]) == "Ville"){
                     return true;
                 }
             }
-            while ($x1 > $x2  && $x1 != $x2) {
+            while ($x1-1 > $x2 ) {
                 $x2++;
                 if($this->existe($x2, $y2) && get_class ($this->villes[$x2][$y2]) == "Ville"){
                     return true;
