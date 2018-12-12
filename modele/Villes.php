@@ -52,7 +52,7 @@ class Villes {
 
     //renvoie true si le nombre de ponts des deux Ville sont compatibles
     function nbPontPossible($x1, $y1, $x2, $y2) {
-        return ($this->villes[$x1][$y1]->nombrePonts < $this->villes[$x1][$y1]->nombrePontsMax && $this->villes[$x2][$y2]->nombrePonts < $this->villes[$x2][$y2]->nombrePontsMax);
+        return ($this->villes[$x1][$y1]->getNombrePonts < $this->villes[$x1][$y1]->getNombrePontsMax && $this->villes[$x2][$y2]->getNombrePonts < $this->villes[$x2][$y2]->getNombrePontsMax);
     }
 
     //test si le choix provoque un arret du jeu
