@@ -168,16 +168,16 @@ class Villes {
 
                 }
                 while ($y1-1 > $y2) {
-                    $y1++;
+                    $y2++;
                     $this->villes[$x1][$y1] = new Bridge(True, 1);
                 }
             }else if ($y1 == $y2) {
                 while ($x1 < $x2-1) {
-                    $y1++;
+                    $x1++;
                     $this->villes[$x1][$y1] = new Bridge(True, 1);
                 }
                 while ($x1-1 > $x2 ) {
-                    $y1++;
+                    $x2++;
                     $this->villes[$x1][$y1] = new Bridge(True, 1);
                 }
             }
