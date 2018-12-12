@@ -51,4 +51,14 @@ class Ville {
         $this->villesLiees[] = array($x, $y);
     }
 
+    function getNbLinkWith($x, $y){
+        $res = 0;
+        foreach($this->villesLiees as $couple){
+            if($couple == array($x, $y)){
+                $res++;
+            }
+        }
+        return $res;
+    }
+
 }
