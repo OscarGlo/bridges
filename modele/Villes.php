@@ -169,7 +169,7 @@ class Villes {
             $this->villes[$x2][$y2]->linkWith($x1, $y1);
             $this->villes[$x2][$y2]->setNombrePonts($this->villes[$x2][$y2]->getNombrePonts()+1);
 
-            if ($x1 == $x2) {
+            /*if ($x1 == $x2) {
                 while ($y1 < $y2-1) {
                     $y1++;
                     $this->villes[$x1][$y1] = new Bridge(false, 1);
@@ -188,9 +188,9 @@ class Villes {
                     $x2++;
                     $this->villes[$x2][$y2] = new Bridge(false, 1);
                 }
-            }
+            }*/
 
-            /*if ($x1 == $x2) {
+            if ($x1 == $x2) {
                 while ($y1 < $y2-1) {
                     $y1++;
                     if($this->existe($x1,$y1)){
@@ -226,7 +226,7 @@ class Villes {
                         $this->villes[$x2][$y2] = new Bridge(true, 1);
                     }
                 }
-            }*/
+            }
 
         }
     }
