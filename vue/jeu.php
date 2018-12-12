@@ -47,20 +47,13 @@
         $x2 = intval(substr($current, 0, 1));
         $y2 = intval(substr($current, 2, 1));
 
-        echo $villes->nbLink($x1, $y1, $x2, $y2) ? "link ok" : "link no";
-        echo "<br>";
-        echo $villes->onSameAxis($x1, $y1, $x2, $y2) ? "axis ok" : "axis no";
-        echo "<br>";
-        echo $villes->villesEntre($x1, $y1, $x2, $y2) ? "entre ok" : "entre no";
-        echo "<br>";
-
         echo get_class($villes->getVille(1, 1));
 
-        /*if ($villes->isLinkable($x1, $y1, $x2, $y2))
-            $villes->link($x1, $y1, $x2, $y2);*/
+        if ($villes->wrongChoice($x1, $y1, $x2, $y2))
+            echo "lose";
+        else
+            $villes->link($x1, $y1, $x2, $y2);
     }
-
-    echo "<br>";
 
     for ($i = 0; $i < 7; $i++) {
         for ($j = 0; $j < 7; $j++) {
