@@ -99,7 +99,7 @@ class Villes {
         if ($x1 == $x2) {
             while ($y1 < $y2) {
                 $y1++;
-                if(get_class ($this->villes[$x2][$y2]) == "Bridge"){
+                if(get_class ($this->villes[$x1][$y1]) == "Bridge"){
                     return true;
                 }
             }
@@ -112,7 +112,7 @@ class Villes {
         }else if ($y1 == $y2) {
             while ($x1 < $x2) {
                 $x1++;
-                if(get_class ($this->villes[$x2][$y2]) == "Bridge"){
+                if(get_class ($this->villes[$x1][$y1]) == "Bridge"){
                     return true;
                 }
             }
@@ -169,7 +169,7 @@ class Villes {
                 }
                 while ($y1-1 > $y2) {
                     $y2++;
-                    $this->villes[$x1][$y1] = new Bridge(True, 1);
+                    $this->villes[$x2][$y2] = new Bridge(True, 1);
                 }
             }else if ($y1 == $y2) {
                 while ($x1 < $x2-1) {
@@ -178,7 +178,7 @@ class Villes {
                 }
                 while ($x1-1 > $x2 ) {
                     $x2++;
-                    $this->villes[$x1][$y1] = new Bridge(True, 1);
+                    $this->villes[$x2][$y2] = new Bridge(True, 1);
                 }
             }
 
