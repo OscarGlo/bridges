@@ -62,7 +62,7 @@ class Villes {
     }
 
     function nbMaxPontEntre($x1, $y1, $x2, $y2){
-        return !($this->villes[$x1][$y1]->getNbLinkWith($x2, $y2) <=2);
+        return ($this->villes[$x1][$y1]->getNbLinkWith($x2, $y2) <=2);
     }
 
     //test si il y a des Ville entre deux Ville
