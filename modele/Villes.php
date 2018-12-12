@@ -61,6 +61,10 @@ class Villes {
         return !$this->nbPontPossible($x1, $y1, $x2, $y2) or $this->pontEntre($x1, $y1, $x2, $y2);
     }
 
+    function nbMaxPontEntre($x1, $y1, $x2, $y2){
+        return !($this->villes[$x1][$y1]->getNbLinkWith($x2, $y2) <=2);
+    }
+
     //test si il y a des Ville entre deux Ville
     function villesEntre($x1, $y1, $x2, $y2) {
         if ($x1 == $x2) {
@@ -154,7 +158,9 @@ class Villes {
             if ($this->nbLink($x1, $y1, $x2, $y2)) {
                 if ($this->onSameAxis($x1, $y1, $x2, $y2)) {
                     if (!$this->villesEntre($x1, $y1, $x2, $y2)){
-                        return true;
+                        if($this->nbMaxPontEntre($x1, $y1, $x2, $y2)){
+                            return true;
+                        }
                     }
                 }
             }
