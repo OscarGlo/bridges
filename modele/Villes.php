@@ -156,9 +156,9 @@ class Villes {
     function link($x1, $y1, $x2, $y2) {
         if ($this->isLinkable($x1, $y1, $x2, $y2)) {
             $this->villes[$x1][$y1]->linkWith($x2, $y2);
-            $this->villes[$x1][$y1]->nombrePonts++;
+            $this->villes[$x1][$y1]->setNombrePonts($this->villes[$x1][$y1]->getNombrePonts());
             $this->villes[$x2][$y2]->linkWith($x1, $y1);
-            $this->villes[$x2][$y2]->nombrePonts++;
+            $this->villes[$x2][$y2]->setNombrePonts($this->villes[$x2][$y2]->getNombrePonts());
 
             if ($x1 == $x2) {
                 while ($y1 < $y2-1) {
