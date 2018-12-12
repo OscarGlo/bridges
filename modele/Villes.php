@@ -1,6 +1,7 @@
 <?php
 // cette classe ne doit pas être modifiée
 require "Ville.php";
+require "Bridge.php";
 
 class Villes {
 
