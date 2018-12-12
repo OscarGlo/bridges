@@ -192,17 +192,17 @@ class Villes {
                 while ($x1 < $x2-1) {
                     $x1++;
                     if($this->existe($x1,$y1)){
-                        $this->villes[$x1][$y1] = new Bridge(false, 2);
+                        $this->villes[$x1][$y1] = new Bridge(true, 2);
                     }else{
-                        $this->villes[$x1][$y1] = new Bridge(false, 1);
+                        $this->villes[$x1][$y1] = new Bridge(true, 1);
                     }
                 }
                 while ($x1-1 > $x2 ) {
                     $x2++;
                     if($this->existe($x2, $y2)){
-                        $this->villes[$x2][$y2] = new Bridge(false, 2);
+                        $this->villes[$x2][$y2] = new Bridge(true, 2);
                     }else{
-                        $this->villes[$x2][$y2] = new Bridge(false, 1);
+                        $this->villes[$x2][$y2] = new Bridge(true, 1);
                     }
                 }
             }
