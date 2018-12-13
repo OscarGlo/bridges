@@ -58,7 +58,7 @@ class ControleurJeu {
     }
 
     function retour(){
-        $_SESSION["villes"] = $_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1];
+        $_SESSION["villes"] = serialize($_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1]);
         unset($_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1]);
         unset($_SESSION["last"]);
         $this->jeu();
