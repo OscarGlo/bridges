@@ -6,6 +6,7 @@ class ControleurJeu {
     private $vue;
 
     public function __construct() {
+        //initialisation lors du premier lancement
         $_SESSION["villes"] = serialize(new Villes());
         $this->vue = new Vue();
         $this->connexion = new Connexion();
@@ -14,9 +15,6 @@ class ControleurJeu {
 
     function jeu() {
 
-        if(!isset($_SESSION["villes"])){
-            $_SESSION["villes"] = serialize(new Villes());
-        }
 
         $villes = unserialize($_SESSION["villes"]);
 
@@ -46,12 +44,13 @@ class ControleurJeu {
                 return;
             } else {
 
+                //lorsque le choix est valide on empile le jeu dans la pileDeJeu
                 if(!isset($_SESSION["pileDeJeu"])){
                     $_SESSION["pileDeJeu"] = array();
                 }
                 $_SESSION["pileDeJeu"][] = serialize($villes);
 
-
+                //ensuite lie les villes entre elles
                 $villes->link($x1, $y1, $x2, $y2);
             }
 
@@ -81,27 +80,34 @@ class ControleurJeu {
     }
 
     //fonction de réinitialisation
+    //reset des variables puis ajout à la BDD
+    //relancement du jeu
     function reinitialisation(){
         unset($_SESSION["pileDeJeu"]);
         unset($_SESSION["last"]);
-        unset($_SESSION["villes"]);
+        $_SESSION["villes"] = serialize(new Villes());
         $this->connexion->enregPartie(0, $_SESSION["login"]);
         $this->jeu();
 
 
     }
 
-    //Si on a appuyé perdu le jeu
+    //Si on a perdu le jeu
+    //reset des variables puis ajout à la BDD
+    //redirection vers la Vue des resultats
     function perdu() {
-        unset($_SESSION["villes"]);
+        $_SESSION["villes"] = serialize(new Villes());
         unset($_SESSION["pileDeJeu"]);
         unset($_SESSION["last"]);
         $this->connexion->enregPartie(0, $_SESSION["login"]);
         $this->vue->resultat("perdu...");
     }
 
+    //Si on gagne le jeu
+    //reset des variables puis ajout à la BDD
+    //redirection vers la Vue des resultats
     function gagne() {
-        unset($_SESSION["villes"]);
+        $_SESSION["villes"] = serialize(new Villes());
         unset($_SESSION["pileDeJeu"]);
         unset($_SESSION["last"]);
         $this->connexion->enregPartie(1, $_SESSION["login"]);
