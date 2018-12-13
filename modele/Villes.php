@@ -28,6 +28,18 @@ class Villes {
         return $this->villes[$i][$j];
     }
 
+    function getTaille(){
+        $max = 0;
+        foreach(array_keys($this->villes) as $row) {
+            foreach (array_keys($this->villes[$row]) as $col)
+                if ($col > $max) $max = $col;
+            if ($row > $max) $max = $row;
+        }
+
+        return $max;
+
+    }
+
 
     // modifieur qui value le nombre de ponts de la ville en position $i et $j;
     // précondition: la ville en position $i et $j existe

@@ -22,8 +22,10 @@
     <?php
     $villes = unserialize($_SESSION["villes"]);
 
-    for ($i = 0; $i < 7; $i++) {
-        for ($j = 0; $j < 7; $j++) {
+    $size = $villes->getTaille();
+
+    for ($i = 0; $i < $size; $i++) {
+        for ($j = 0; $j < $size; $j++) {
             if ($villes->existe($i, $j)) {
                 $ville = $villes->getVille($i, $j);
                 if (get_class($ville) == "Ville")
