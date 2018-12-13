@@ -14,4 +14,22 @@ class Vue {
     function jeu() {
         include "jeu.php";
     }
+
+    function resultat($str) {
+        echo "<!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset=\"UTF-8\">
+                <title>Bridges — Authentification</title>
+            </head>
+            <body>
+                <h2>Vous avez ".$str."</h2>
+                <form action=\"\" method=\"post\">
+                    <label>Login: <input type=\"text\" name=\"login\"></label>
+                    <label>Mot de passe: <input type=\"password\" name=\"mdp\"></label>
+                    <input type=\"submit\">
+                </form>
+            </body>
+            </html>;";
+    }
 }

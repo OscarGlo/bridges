@@ -1,4 +1,5 @@
 <?php
+require_once HOME."modele/Connection.php";
 require_once HOME."vue/vue.php";
 
 class ControleurJeu {
@@ -6,6 +7,7 @@ class ControleurJeu {
 
     public function __construct() {
         $this->vue = new Vue();
+        $this->connexion = new Connexion();
     }
 
     function jeu() {
@@ -52,7 +54,7 @@ class ControleurJeu {
             }
 
             if ($villes->gagne()) {
-                $this->vue->gagne();
+                $this->gagne();
                 return;
             }
         }
@@ -87,6 +89,14 @@ class ControleurJeu {
 
     //Si on a appuyé perdu le jeu
     function perdu() {
-        $this->vue->perdu();
+        unset($_SESSION["villes"]);
+        $this->connexion->enregPartie(0, $_SESSION["login"]);
+        $this->vue->resultat("perdu...");
+    }
+
+    function gagne() {
+        unset($_SESSION["villes"]);
+        $this->connexion->enregPartie(1, $_SESSION["login"]);
+        $this->vue->resultat("gagné !");
     }
 }

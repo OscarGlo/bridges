@@ -92,8 +92,17 @@ class Connexion {
                 return false;
             }
         } catch (PDOException $e) {
-            $this->deconnexion();
             throw new TableAccesException("problème avec la table pseudonyme");
+        }
+    }
+
+
+    public function enregPartie($gagne, $pseudo) {
+        try {
+            $this->connexion->exec("INSERT INTO parties VALUES (NULL, '" . $pseudo . "', ". $gagne .");");
+        } catch (PDOException $e) {
+            echo $e;
+            throw new TableAccesException("problème avec la table parties");
         }
     }
 }

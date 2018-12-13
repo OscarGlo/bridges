@@ -19,7 +19,9 @@ class Routeur {
         else if (isset($_POST["logout"])) {
             session_destroy();
             $this->vue->auth();
-        } else if (isset($_SESSION["login"]))
+        } else if (isset($_POST["retour"]))
+            $this->controlJeu->retour();
+        else if (isset($_SESSION["login"]))
             $this->controlJeu->jeu();
         else
             $this->vue->auth();
