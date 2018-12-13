@@ -39,7 +39,6 @@ class Villes {
 
     // permet de tester si la ville en position $i et $j existe
     // postcondition: vrai si la ville existe, faux sinon
-
     function existe($i, $j) {
         return isset($this->villes[$i][$j]);
     }
@@ -47,22 +46,42 @@ class Villes {
     //rajout d'éventuelles méthodes
 
 
+
+
+
+    //teste si la partie est gagnée
+    function gagne(){
+
+        foreach($this->villes as $row){
+            foreach($row as $elem){
+
+                if(get_class ($elem) == "Ville"){
+                    if($elem->getNombrePonts() != $elem->getNombrePontsMax()) return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    //teste si deux Ville sont allignées
     function onSameAxis($x1, $y1, $x2, $y2) {
         return ($x1 == $x2 || $y1 == $y2) && !($x1 == $x2 && $y1 == $y2);
     }
 
-    //renvoie true si le nombre de ponts des deux Ville sont compatibles
+    //renvoie true ou false si les Ville 1 et 2 peuvent encore avoir des ponts
     function nbPontPossible($x1, $y1, $x2, $y2) {
         return ($this->villes[$x1][$y1]->getNombrePonts() < $this->villes[$x1][$y1]->getNombrePontsMax() && $this->villes[$x2][$y2]->getNombrePonts() < $this->villes[$x2][$y2]->getNombrePontsMax());
     }
 
-    //test si le choix provoque un arret du jeu
+    //test si le choix des Ville provoque un arret du jeu
     function wrongChoice($x1, $y1, $x2, $y2) {
-        return !$this->nbPontPossible($x1, $y1, $x2, $y2) or $this->pontEntre($x1, $y1, $x2, $y2);
+        return !$this->nbPontPossible($x1, $y1, $x2, $y2) /*or $this->pontEntre($x1, $y1, $x2, $y2)*/;
     }
 
+    //test si deux Ville peuvent être reliées par un pont supplémentaire
     function nbMaxPontEntre($x1, $y1, $x2, $y2){
-        return ($this->villes[$x1][$y1]->getNbLinkWith($x2, $y2) <=2);
+        return ($this->villes[$x1][$y1]->getNbLinkWith($x2, $y2) <2);
     }
 
     //test si il y a des Ville entre deux Ville
@@ -99,6 +118,7 @@ class Villes {
     }
 
     //vérifie si il y a des ponts entre les Ville
+    //renvoie true si il y a entre les deux Ville un pont qui n'a pas le bon axe(donc si un pont coupe le chemin)
     function pontEntre($x1, $y1, $x2, $y2){
         if ($x1 == $x2) {
             while ($y1 < $y2) {
@@ -138,6 +158,7 @@ class Villes {
         return false;
     }
 
+    //renvoie true si la Ville 1 peut être liée une seconde fois à la Ville 2
     function nbLink($x1, $y1, $x2, $y2) {
         $tmpNbVilles = $this->villes[$x1][$y1]->getVillesLiees();
         $nb = 0;
@@ -174,27 +195,6 @@ class Villes {
             $this->villes[$x1][$y1]->setNombrePonts($this->villes[$x1][$y1]->getNombrePonts()+1);
             $this->villes[$x2][$y2]->linkWith($x1, $y1);
             $this->villes[$x2][$y2]->setNombrePonts($this->villes[$x2][$y2]->getNombrePonts()+1);
-
-            /*if ($x1 == $x2) {
-                while ($y1 < $y2-1) {
-                    $y1++;
-                    $this->villes[$x1][$y1] = new Bridge(false, 1);
-
-                }
-                while ($y1-1 > $y2) {
-                    $y2++;
-                    $this->villes[$x2][$y2] = new Bridge(false, 1);
-                }
-            }else if ($y1 == $y2) {
-                while ($x1 < $x2-1) {
-                    $x1++;
-                    $this->villes[$x1][$y1] = new Bridge(false, 1);
-                }
-                while ($x1-1 > $x2 ) {
-                    $x2++;
-                    $this->villes[$x2][$y2] = new Bridge(false, 1);
-                }
-            }*/
 
             if ($x1 == $x2) {
                 while ($y1 < $y2-1) {
