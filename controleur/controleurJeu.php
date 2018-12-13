@@ -37,6 +37,11 @@ class ControleurJeu {
                 return;
             } else
                 $villes->link($x1, $y1, $x2, $y2);
+
+            if ($villes->gagne()) {
+                $this->vue->gagne();
+                return;
+            }
         }
 
         $_SESSION["villes"] = serialize($villes);
