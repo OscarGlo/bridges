@@ -24,12 +24,8 @@ class Vue {
             </head>
             <body>
                 <h2>Vous avez ".$str."</h2>
-                <form action=\"\" method=\"post\">
-                    <label>Login: <input type=\"text\" name=\"login\"></label>
-                    <label>Mot de passe: <input type=\"password\" name=\"mdp\"></label>
-                    <input type=\"submit\">
-                </form>
+                <p>Vous pouvez recharger la page pour rejouer.</p>
             </body>
-            </html>;";
+            </html>";
     }
 }

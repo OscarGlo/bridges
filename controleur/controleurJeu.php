@@ -3,22 +3,21 @@ require_once HOME."modele/Connection.php";
 require_once HOME."vue/vue.php";
 
 class ControleurJeu {
-    private $vue;
+    private $vue, $connexion;
 
     public function __construct() {
-        $_SESSION["villes"] = serialize(new Villes());
+        if (!isset($_SESSION["villes"]))
+            $_SESSION["villes"] = serialize(new Villes());
         $this->vue = new Vue();
         $this->connexion = new Connexion();
 
     }
 
     function jeu() {
-
-        if(!isset($_SESSION["villes"])){
-            $_SESSION["villes"] = serialize(new Villes());
-        }
-
-        $villes = unserialize($_SESSION["villes"]);
+        if (!isset($_SESSION["villes"]))
+            $villes = new Villes();
+        else
+            $villes = unserialize($_SESSION["villes"]);
 
         $current = null;
 
