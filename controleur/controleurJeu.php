@@ -40,7 +40,7 @@ class ControleurJeu {
                 if(!isset($_SESSION["pileDeJeu"])){
                     $_SESSION["pileDeJeu"] = array();
                 }
-                $_SESSION["pileDeJeu"][] = $villes;
+                $_SESSION["pileDeJeu"][] = serialize($villes);
 
 
                 $villes->link($x1, $y1, $x2, $y2);
@@ -58,7 +58,7 @@ class ControleurJeu {
     }
 
     function retour(){
-        $_SESSION["villes"] = serialize($_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1]);
+        $_SESSION["villes"] = $_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1];
         unset($_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1]);
         unset($_SESSION["last"]);
         $this->jeu();
