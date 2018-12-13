@@ -58,9 +58,12 @@ class ControleurJeu {
     }
 
     function retour(){
-        $_SESSION["villes"] = $_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1];
-        unset($_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1]);
-        unset($_SESSION["last"]);
+        if (isset($_SESSION["pileDeJeu"][0])){
+            $_SESSION["villes"] = $_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1];
+            unset($_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1]);
+            unset($_SESSION["last"]);
+        }
+
         $this->jeu();
 
     }
