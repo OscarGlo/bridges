@@ -35,8 +35,16 @@ class ControleurJeu {
             else if ($villes->wrongChoice($x1, $y1, $x2, $y2)) {
                 $this->perdu();
                 return;
-            } else
+            } else {
+
+                if(!isset($_SESSION["pileDeJeu"])){
+                    $_SESSION["pileDeJeu"] = array();
+                }
+                $_SESSION["pileDeJeu"][] = $villes;
+
+
                 $villes->link($x1, $y1, $x2, $y2);
+            }
 
             if ($villes->gagne()) {
                 $this->vue->gagne();
@@ -49,8 +57,15 @@ class ControleurJeu {
         $this->vue->jeu();
     }
 
+    function retour(){
+        $_SESSION["villes"] = $_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1];
+        unset($_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1]);
+        unset($_SESSION["last"]);
+        $this->jeu();
+
+    }
+
     function perdu() {
-        
 
         $this->vue->perdu();
     }
