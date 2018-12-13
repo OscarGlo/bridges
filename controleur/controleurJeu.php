@@ -9,6 +9,11 @@ class ControleurJeu {
     }
 
     function jeu() {
+
+        if(!isset($_SESSION["villes"])){
+            $_SESSION["villes"] = serialize(new Villes());
+        }
+
         $villes = unserialize($_SESSION["villes"]);
 
         $current = null;
@@ -57,19 +62,31 @@ class ControleurJeu {
         $this->vue->jeu();
     }
 
+    //si on a appuyé sur le bouton retour
     function retour(){
+        //si la pile de jeu n'est pas vide, Villes est remplacé par le Villes en haut de la pile
         if (isset($_SESSION["pileDeJeu"][0])){
             $_SESSION["villes"] = $_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1];
             unset($_SESSION["pileDeJeu"][count($_SESSION["pileDeJeu"])-1]);
             unset($_SESSION["last"]);
         }
 
+        //On appelle le jeu pour qu'il se recharge avec la nouvelle Villes
         $this->jeu();
 
     }
 
-    function perdu() {
+    //fonction de réinitialisation
+    function reinitialisation(){
+        unset($_SESSION["pileDeJeu"]);
+        unset($_SESSION["last"]);
+        unset($_SESSION["villes"]);
+        $this->jeu();
 
+    }
+
+    //Si on a appuyé perdu le jeu
+    function perdu() {
         $this->vue->perdu();
     }
 }
