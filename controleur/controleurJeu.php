@@ -14,8 +14,6 @@ class ControleurJeu {
     }
 
     function jeu() {
-
-
         $villes = unserialize($_SESSION["villes"]);
 
         $current = null;

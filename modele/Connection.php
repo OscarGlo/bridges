@@ -96,7 +96,6 @@ class Connexion {
         }
     }
 
-
     public function enregPartie($gagne, $pseudo) {
         try {
             $this->connexion->exec("INSERT INTO parties VALUES (NULL, '" . $pseudo . "', ". $gagne .");");
@@ -104,5 +103,38 @@ class Connexion {
             echo $e;
             throw new TableAccesException("problème avec la table parties");
         }
+    }
+
+    public function winLoseJoueurs() {
+        try {
+            $query = "SELECT pseudo as p, (SELECT COUNT(*) FROM parties WHERE pseudo = p AND partieGagnee = 1) as win,
+                                          (SELECT COUNT(*) FROM parties WHERE pseudo = p AND partieGagnee = 0) as lose
+                      FROM parties GROUP BY p";
+            return $this->connexion->query($query)->fetchAll();
+        } catch (PDOException $e) {
+            echo $e;
+            throw new TableAccesException("problème avec la table parties");
+        }
+    }
+
+    public function troisMeilleursJoueurs() {
+        $winLose = $this->winLoseJoueurs();
+        $best = array();
+        foreach ($winLose as $row) {
+            $pseudo = $row["p"];
+            $ratio = $row["win"] / ($row["win"] + $row["lose"]);
+            for ($i = 0; $i < 3; $i++)
+                if (!isset($best[$i])) {
+                    $best[$i] = array($pseudo, $ratio);
+                    break;
+                } else if ($best[$i][1] < $ratio) {
+                    for ($j = 2; $j > $i; $j--)
+                        if (isset($best[$j - 1]))
+                            $best[$j] = $best[$j - 1];
+                    $best[$i] = array($pseudo, $ratio);
+                    break;
+                }
+        }
+        return $best;
     }
 }
