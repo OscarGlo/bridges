@@ -21,6 +21,8 @@ class Routeur {
             $this->vue->auth();
         } else if (isset($_POST["retour"]))
             $this->controlJeu->retour();
+        else if (isset($_POST["reinit"]))
+            $this->controlJeu->reinitialisation();
         else if (isset($_SESSION["login"]))
             $this->controlJeu->jeu();
         else

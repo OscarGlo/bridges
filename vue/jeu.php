@@ -15,8 +15,7 @@
 </head>
 <body>
 <form action="" method="post">
-    <input type="submit" name="logout" value="Déconnexion"><br>
-    <input type="submit" name="retour" value="Annuler le pont">
+    <input type="submit" name="logout" value="Déconnexion">
 </form>
 <form action="" method="post">
     <br>
@@ -46,5 +45,11 @@
     }
     ?>
 </form>
+
+<form action="" method="post">
+    <input type="submit" name="reinit" value="Réinitialiser le jeu">
+    <input type="submit" name="retour" value="Annuler le pont">
+</form>
+
 </body>
 </html>
