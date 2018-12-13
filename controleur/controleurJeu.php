@@ -6,9 +6,10 @@ class ControleurJeu {
     private $vue;
 
     public function __construct() {
+        $_SESSION["villes"] = serialize(new Villes());
         $this->vue = new Vue();
         $this->connexion = new Connexion();
-        $_SESSION["villes"] = serialize(new Villes());
+
     }
 
     function jeu() {
