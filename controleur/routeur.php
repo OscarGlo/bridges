@@ -2,12 +2,14 @@
 
 require_once HOME."vue/vue.php";
 require_once "controleurAuth.php";
+require_once "controleurJeu.php";
 
 class Routeur {
-    private $vue, $controlAuth;
+    private $vue, $controlAuth, $controlJeu;
 
     public function __construct() {
         $this->controlAuth = new ControleurAuth();
+        $this->controlJeu = new ControleurJeu();
         $this->vue = new Vue();
     }
 
@@ -18,7 +20,7 @@ class Routeur {
             session_destroy();
             $this->vue->auth();
         } else if (isset($_SESSION["login"]))
-            $this->vue->jeu();
+            $this->controlJeu->jeu();
         else
             $this->vue->auth();
     }
