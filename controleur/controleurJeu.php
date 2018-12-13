@@ -8,6 +8,7 @@ class ControleurJeu {
     public function __construct() {
         $this->vue = new Vue();
         $this->connexion = new Connexion();
+        $_SESSION["villes"] = serialize(new Villes());
     }
 
     function jeu() {
@@ -83,19 +84,25 @@ class ControleurJeu {
         unset($_SESSION["pileDeJeu"]);
         unset($_SESSION["last"]);
         unset($_SESSION["villes"]);
+        $this->connexion->enregPartie(0, $_SESSION["login"]);
         $this->jeu();
+
 
     }
 
     //Si on a appuyé perdu le jeu
     function perdu() {
         unset($_SESSION["villes"]);
+        unset($_SESSION["pileDeJeu"]);
+        unset($_SESSION["last"]);
         $this->connexion->enregPartie(0, $_SESSION["login"]);
         $this->vue->resultat("perdu...");
     }
 
     function gagne() {
         unset($_SESSION["villes"]);
+        unset($_SESSION["pileDeJeu"]);
+        unset($_SESSION["last"]);
         $this->connexion->enregPartie(1, $_SESSION["login"]);
         $this->vue->resultat("gagné !");
     }
