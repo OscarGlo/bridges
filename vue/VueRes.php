@@ -9,11 +9,11 @@ class Vue {
     }
 
     function auth() {
-        include "auth.php";
+        include "VueAuth.php";
     }
 
     function jeu() {
-        include "jeu.php";
+        include "VueJeu.php";
     }
 
     function resultat($str) {

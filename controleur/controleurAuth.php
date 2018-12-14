@@ -1,7 +1,7 @@
 <?php
 
 require_once HOME."modele/Connection.php";
-require_once HOME."vue/vue.php";
+require_once HOME . "vue/VueRes.php";
 
 class ControleurAuth {
     private $vue, $connexion;
