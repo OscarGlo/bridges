@@ -15,7 +15,7 @@
 </head>
 <body>
 <form action="" method="post">
-    <input type="submit" name="logout" value="Déconnexion">
+    <input type="submit" name="decoPendantJeu" value="Déconnexion">
 </form>
 <form action="" method="post">
     <br>

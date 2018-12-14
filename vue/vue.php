@@ -28,7 +28,7 @@ class Vue {
                 <p>Vous pouvez recharger la page pour rejouer.</p>
                 <form action=\"\" method=\"post\">
                     <input type=\"submit\" value=\"Relancer le jeu\">
-                    <input type=\"submit\" name=\"logout\" value=\"Déconnexion\">
+                    <input type=\"submit\" name=\"decoPendantResultat\" value=\"Déconnexion\">
                 </form><br>
                 <b>Mes statistiques:</b><br>";
         foreach ($this->connect->winLoseJoueurs() as $row)

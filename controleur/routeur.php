@@ -16,10 +16,12 @@ class Routeur {
     function routerRequete() {
         if (isset($_POST["login"]) && isset($_POST["mdp"]))
             $this->controlAuth->auth();
-        else if (isset($_POST["logout"])) {
+        else if (isset($_POST["decoPendantResultat"])) {
             session_destroy();
             $this->vue->auth();
-        } else if (isset($_POST["retour"]))
+        } else if (isset($_POST["decoPendantJeu"]))
+            $this->controlJeu->deconnexion();
+        else if (isset($_POST["retour"]))
             $this->controlJeu->retour();
         else if (isset($_POST["reinit"]))
             $this->controlJeu->reinitialisation();

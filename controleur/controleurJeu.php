@@ -101,6 +101,15 @@ class ControleurJeu {
         $this->vue->resultat("perdu...");
     }
 
+    //Si on se déconnecte pendant le jeu
+    //reset des variables puis ajout à la BDD
+    //redirection vers la Vue de connexion
+    function deconnexion() {
+        $this->connexion->enregPartie(0, $_SESSION["login"]);
+        session_destroy();
+        $this->vue->auth();
+    }
+
     //Si on gagne le jeu
     //reset des variables puis ajout à la BDD
     //redirection vers la Vue des resultats
