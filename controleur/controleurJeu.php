@@ -1,6 +1,6 @@
 <?php
 require_once HOME."modele/Connection.php";
-require_once HOME . "vue/VueRes.php";
+require_once HOME . "vue/Vue.php";
 
 class ControleurJeu {
     private $vue, $connexion;

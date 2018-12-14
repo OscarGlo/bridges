@@ -1,6 +1,6 @@
 <?php
 
-require_once HOME . "vue/VueRes.php";
+require_once HOME . "vue/Vue.php";
 require_once "controleurAuth.php";
 require_once "controleurJeu.php";
 
