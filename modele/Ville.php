@@ -49,6 +49,7 @@ class Ville {
 
     function linkWith($x, $y) {
         $this->villesLiees[] = array($x, $y);
+        $this->nombrePonts++;
     }
 
     function getNbLinkWith($x, $y){

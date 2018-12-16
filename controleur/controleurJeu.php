@@ -18,8 +18,10 @@ class ControleurJeu {
 
         $current = null;
 
-        if (count(array_keys($_POST)) > 0 && mb_ereg_match("^[0-9]|[0-9]_x$", array_keys($_POST)[0]))
-            $current = substr(array_keys($_POST)[0], 0, 3);
+        if (count(array_keys($_POST)) > 0 && mb_ereg_match("^[0-9]+|[0-9]+_x$", array_keys($_POST)[0])) {
+            $str = array_keys($_POST)[0];
+            $current = substr($str, 0, strpos($str, "_x"));
+        }
 
         $last = null;
 
@@ -30,10 +32,10 @@ class ControleurJeu {
             $_SESSION["last"] = $current;
 
         if (!is_null($current) && !is_null($last)) {
-            $x1 = intval(substr($last, 0, 1));
-            $y1 = intval(substr($last, 2, 1));
-            $x2 = intval(substr($current, 0, 1));
-            $y2 = intval(substr($current, 2, 1));
+            $x1 = intval(substr($last, 0, strpos($last, "|")));
+            $y1 = intval(substr($last, strpos($last, "|") + 1));
+            $x2 = intval(substr($current, 0, strpos($current, "|")));
+            $y2 = intval(substr($current, strpos($current, "|") + 1));
 
             if (!$villes->isLinkable($x1, $y1, $x2, $y2))
                 echo "Ces deux villes ne peuvent pas être connectées<br>";
@@ -41,7 +43,6 @@ class ControleurJeu {
                 $this->perdu();
                 return;
             } else {
-
                 //lorsque le choix est valide on empile le jeu dans la pileDeJeu
                 if(!isset($_SESSION["pileDeJeu"])){
                     $_SESSION["pileDeJeu"] = array();

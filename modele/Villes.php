@@ -14,7 +14,7 @@ class Villes {
         $this->villes[0][6] = new Ville("1", 2, 0);
         $this->villes[3][0] = new Ville("2", 6, 0);
         $this->villes[3][5] = new Ville("3", 2, 0);
-        $this->villes[5][1] = new Ville("4", 1, 0);
+        $this->villes[5][2] = new Ville("4", 1, 0);
         $this->villes[5][6] = new Ville("5", 2, 0);
         $this->villes[6][0] = new Ville("6", 2, 0);
 
@@ -28,6 +28,7 @@ class Villes {
         return $this->villes[$i][$j];
     }
 
+    //renvoie la taille du plateau de jeu (la valeur la plus grande entre hauteur et largeur du plateau)
     function getTaille(){
         $max = 0;
         foreach(array_keys($this->villes) as $row) {
@@ -188,15 +189,16 @@ class Villes {
     //tester si deux villes sont reliables
     function isLinkable($x1, $y1, $x2, $y2) {
         if ($this->existe($x1, $y1) && $this->existe($x2, $y2)) {
-            if ($this->nbLink($x1, $y1, $x2, $y2)) {
-                if ($this->onSameAxis($x1, $y1, $x2, $y2)) {
-                    if (!$this->villesEntre($x1, $y1, $x2, $y2)){
+            if ($this->onSameAxis($x1, $y1, $x2, $y2)) {
+                if (!$this->villesEntre($x1, $y1, $x2, $y2)){
+                    if (!$this->pontEntre($x1, $y1, $x2, $y2)){
                         if($this->nbMaxPontEntre($x1, $y1, $x2, $y2)){
                             return true;
                         }
                     }
                 }
             }
+
         }
         return false;
     }
@@ -204,15 +206,13 @@ class Villes {
     function link($x1, $y1, $x2, $y2) {
         if ($this->isLinkable($x1, $y1, $x2, $y2)) {
             $this->villes[$x1][$y1]->linkWith($x2, $y2);
-            $this->villes[$x1][$y1]->setNombrePonts($this->villes[$x1][$y1]->getNombrePonts()+1);
             $this->villes[$x2][$y2]->linkWith($x1, $y1);
-            $this->villes[$x2][$y2]->setNombrePonts($this->villes[$x2][$y2]->getNombrePonts()+1);
 
             if ($x1 == $x2) {
                 while ($y1 < $y2-1) {
                     $y1++;
                     if($this->existe($x1,$y1)){
-                        $this->villes[$x1][$y1] = new Bridge(false, 2);
+                        $this->villes[$x1][$y1]->nb++;
                     }else{
                         $this->villes[$x1][$y1] = new Bridge(false, 1);
                     }
@@ -222,7 +222,7 @@ class Villes {
                 while ($y1-1 > $y2) {
                     $y2++;
                     if($this->existe($x2,$y2)){
-                        $this->villes[$x2][$y2] = new Bridge(false, 2);
+                        $this->villes[$x2][$y2]->nb++;
                     }else{
                         $this->villes[$x2][$y2] = new Bridge(false, 1);
                     }
@@ -231,7 +231,7 @@ class Villes {
                 while ($x1 < $x2-1) {
                     $x1++;
                     if($this->existe($x1,$y1)){
-                        $this->villes[$x1][$y1] = new Bridge(true, 2);
+                        $this->villes[$x1][$y1]->nb++;
                     }else{
                         $this->villes[$x1][$y1] = new Bridge(true, 1);
                     }
@@ -239,7 +239,7 @@ class Villes {
                 while ($x1-1 > $x2 ) {
                     $x2++;
                     if($this->existe($x2, $y2)){
-                        $this->villes[$x2][$y2] = new Bridge(true, 2);
+                        $this->villes[$x2][$y2]->nb++;
                     }else{
                         $this->villes[$x2][$y2] = new Bridge(true, 1);
                     }
